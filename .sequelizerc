@@ -1,0 +1,16 @@
+const path = require('path');
+const dotenv = require('dotenv')
+const envFound = dotenv.config();
+
+if (envFound.error) {
+  // This error should crash whole process
+
+  throw new Error("⚠️  Couldn't find .env file  ⚠️");
+}
+
+module.exports = {
+  'config': path.resolve('src/config', 'sql.js'),
+  'models-path': path.resolve('src/db', 'models'),
+  'seeders-path': path.resolve('src/db', 'seeders'),
+  'migrations-path': path.resolve('src/db', 'migrations')
+}
