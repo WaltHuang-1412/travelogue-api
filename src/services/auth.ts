@@ -1,11 +1,11 @@
-import SequelizeLoader from '../loaders/sequelize';
+import SequelizeSqliteLoader from '../db/sqlite/index';
 import { Sequelize, Model } from 'sequelize';
 import Logger from '../loaders/logger';
 import jwt from 'jsonwebtoken';
 import argon2 from 'argon2';
 import { v1 as uuidv1 } from 'uuid';
-import UserAccountModel from '../db/models/userAccount';
-import UserVerificationModel from '../db/models/userVerification';
+import UserAccountModel from '../db/sqlite/models/userAccount';
+import UserVerificationModel from '../db/sqlite/models/userVerification';
 import config from '../config/index';
 import { randomBytes, Certificate } from 'crypto';
 import { IUserAccount, IUserAccountInputDTO } from '../interfaces/IUserAccount';
@@ -18,7 +18,7 @@ export default class Auth {
   private logger: any;
   private sequelize: Sequelize;
   constructor() {
-    this.sequelize = SequelizeLoader();
+    this.sequelize = SequelizeSqliteLoader();
     this.UserAccount = UserAccountModel(this.sequelize);
     this.UserVerification = UserVerificationModel(this.sequelize);
     this.logger = Logger;

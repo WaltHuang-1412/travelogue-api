@@ -1,6 +1,6 @@
 import expressLoader from './express';
 import { Application } from 'express';
-import sequelizeLoader from './sequelize';
+import sequelizeSqliteLoader from '../db/sqlite/index';
 import swaggerLoader from './swagger';
 // import dependencyInjectorLoader from './dependencyInjector';
 // import mongooseLoader from './mongoose';
@@ -16,10 +16,10 @@ interface defaultInit {
 
 export default async (init: defaultInit) => {
   // const mongoConnection = await mongooseLoader();
-  // Logger.info('✌️ DB loaded and connected!');
-  // const sequelize = sequelizeLoader();
-  // const sequelizeConnection = await sequelize.authenticate();
-  // Logger.info('✌️ DB loaded and connected!');
+  Logger.info('✌️ DB loaded and sqlite connected!');
+  const sequelizeSqlite = sequelizeSqliteLoader();
+  const sequelizeSqliteConnection = await sequelizeSqlite.authenticate();
+  Logger.info('✌️ DB loaded and sqlite connected!');
   /**
    * WTF is going on here?
    *
