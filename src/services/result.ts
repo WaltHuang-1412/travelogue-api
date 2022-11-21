@@ -1,7 +1,7 @@
 import { IErrorCodeList } from '../interfaces/IError';
 export default class Result {
   constructor() {}
-  sucess(code: string = '0000', message: string = 'Success') {
+  success(code: string = '0000', message: string = 'Success') {
     return (data: any = null) => {
       return {
         result: data,

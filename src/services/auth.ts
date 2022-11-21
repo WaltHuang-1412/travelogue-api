@@ -81,7 +81,7 @@ export default class Auth {
       throw error;
     }
   }
-  async verifiation(account: string, code: number) {
+  async verification(account: string, code: number) {
     try {
       const userAccountRecord = await this.UserAccount.findOne({
         where: {

@@ -4,7 +4,7 @@ import Auth from '../../services/auth';
 import Result from '../../services/result';
 import Emailer from '../../services/mailer';
 import Crypto from '../../services/crypto';
-import { ITransporte } from '../../interfaces/IEmail';
+import { ITransport } from '../../interfaces/IEmail';
 const emailer = new Emailer();
 const route = Router();
 const auth = new Auth();
@@ -16,20 +16,20 @@ export default async (app: Router) => {
     res.send('Hello');
   });
   /**
-   * @typedef Signin
+   * @typedef SignIn
    * @property {string} account.required - Some email or phone - eg: eerwrewrwr@example.com
-   * @property {string} password.required - Some password - eg: adsfafafaf
+   * @property {string} password.required - Some password - eg: abcd12345
    */
   /**
    * This function comment is parsed by doctrine
    * @route POST /user/signin
    * @group User - Operations about user
-   * @param {Signin.model} content.body.required - the new point
+   * @param {SignIn.model} content.body.required - the new point
    * @returns {object} 200 - An array of user info
    * @returns {Error}  default - Unexpected error
    */
   route.post(
-    '/signin',
+    '/sign-in',
     celebrate({
       body: Joi.object({
         account: Joi.string().required().email().max(100),
@@ -41,7 +41,7 @@ export default async (app: Router) => {
         const { body } = req;
         const { account, password } = body;
         const { accessToken, refreshToken } = await auth.signIn(account, password);
-        res.json(result.sucess()({ accessToken, refreshToken })).status(200).end();
+        res.json(result.success()({ accessToken, refreshToken })).status(200).end();
       } catch (error) {
         res.json(result.fail()(error));
       }
@@ -77,7 +77,7 @@ export default async (app: Router) => {
         const { name, account, password } = body;
         const { createUserAccount, createUserVerification } = await auth.signUp({ name, account, password });
 
-        const transport: ITransporte = {
+        const transport: ITransport = {
           from: 'test@test.com',
           to: createUserAccount.account,
           subject: 'Test subject',
@@ -85,7 +85,7 @@ export default async (app: Router) => {
           html: `<div>verification code:${createUserVerification.code}</div><div>Account:${createUserAccount.account}</div>`,
         };
         emailer.send(transport);
-        res.json(result.sucess()(createUserAccount)).status(200).end();
+        res.json(result.success()(createUserAccount)).status(200).end();
       } catch (error) {
         res.json(result.fail()(error));
       }
@@ -93,7 +93,7 @@ export default async (app: Router) => {
   );
 
   /**
-   * @typedef Verifiation
+   * @typedef Verification
    * @property {string} account.required - Some email or phone - eg: test@example.com
    * @property {integer} code.required - Some password - eg: 12345678
    */
@@ -101,13 +101,13 @@ export default async (app: Router) => {
    * This function comment is parsed by doctrine
    * @route POST /user/verifiation
    * @group User - Operations about user
-   * @param {Verifiation.model} content.body.required - the new point
+   * @param {Verification.model} content.body.required - the new point
    * @returns {object} 200 - An array of user info
    * @returns {Error}  default - Unexpected error
    */
 
   route.post(
-    '/verifiation',
+    '/verification',
     celebrate({
       body: Joi.object({
         name: Joi.string().max(100).trim(),
@@ -119,7 +119,7 @@ export default async (app: Router) => {
       try {
         const { body } = req;
         const { account, code } = body;
-        await auth.verifiation(account, code);
+        await auth.verification(account, code);
         res.json().status(200).end();
       } catch (error) {
         res.json(result.fail()(error));

@@ -1,4 +1,4 @@
-export interface ITransporte {
+export interface ITransport {
   from: string;
   to: string;
   subject: string;

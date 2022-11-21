@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import config from '../config/index';
-import { ITransporte } from '../interfaces/IEmail';
+import { ITransport } from '../interfaces/IEmail';
 export default class Mail {
   private mailTransport: any;
   constructor() {
@@ -15,7 +15,7 @@ export default class Mail {
     });
   }
   async send(
-    transport: ITransporte = {
+    transport: ITransport = {
       from: '"Test 👻" <test@cloud-interactive.com>',
       to: 'walter.huang@cloud-interactive.com',
       subject: 'Hello',
