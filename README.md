@@ -27,6 +27,8 @@ npm run start
 
 ## Sequelize
 
+- reference(https://github.com/sequelize/cli)
+
 - config path
 
 `

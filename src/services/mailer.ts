@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import config from '../config/index';
-import { ITransport } from '../interfaces/IEmail';
+import { ITransport } from '../types/interfaces/IEmail';
 export default class Mail {
   private mailTransport: any;
   constructor() {

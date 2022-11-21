@@ -4,7 +4,7 @@ import Auth from '../../services/auth';
 import Result from '../../services/result';
 import Emailer from '../../services/mailer';
 import Crypto from '../../services/crypto';
-import { ITransport } from '../../interfaces/IEmail';
+import { ITransport } from '../../types/interfaces/IEmail';
 const emailer = new Emailer();
 const route = Router();
 const auth = new Auth();
@@ -22,7 +22,7 @@ export default async (app: Router) => {
    */
   /**
    * This function comment is parsed by doctrine
-   * @route POST /user/signin
+   * @route POST /user/sign-in
    * @group User - Operations about user
    * @param {SignIn.model} content.body.required - the new point
    * @returns {object} 200 - An array of user info

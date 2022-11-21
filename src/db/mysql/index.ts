@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 import Logger from '../../loaders/logger';
 import sqlConfig from './sql';
 import config from '../../config/index';
-import { ISql } from '../../interfaces/ISql';
+import { ISql } from '../../types/interfaces/ISql';
 
 export default () => {
   const sql: ISql = sqlConfig;

@@ -1,7 +1,6 @@
 import { IErrorCodeList } from '../types/interfaces/IError';
-export default class Result {
-  constructor() {}
-  success(code: string = '0000', message: string = 'Success') {
+function useResult() {
+  const success = (code: string = '0000', message: string = 'Success') => {
     return (data: any = null) => {
       return {
         result: data,
@@ -11,8 +10,8 @@ export default class Result {
         },
       };
     };
-  }
-  fail(errorCode: string = '9999') {
+  };
+  const fail = (errorCode: string = '9999') => {
     const errorCodeList: IErrorCodeList = {
       '0001': 'account or password is fail',
       '0002': 'email or phone is repeat',
@@ -32,5 +31,6 @@ export default class Result {
         },
       };
     };
-  }
+  };
+  return { success };
 }
