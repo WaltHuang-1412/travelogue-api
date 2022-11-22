@@ -3,13 +3,13 @@ import { celebrate, Joi } from 'celebrate';
 import Auth from '../../services/auth';
 import Result from '../../services/result';
 import Emailer from '../../services/mailer';
-import Crypto from '../../services/crypto';
+
 import { ITransport } from '../../types/interfaces/IEmail';
 const emailer = new Emailer();
 const route = Router();
 const auth = new Auth();
 const result = new Result();
-const crypto = new Crypto();
+
 export default async (app: Router) => {
   app.use('/user', route);
   route.get('/', async (req: Request, res: Response) => {
