@@ -10,6 +10,7 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 //   console.log(`Example app listening at http://localhost:${port}`);
 // });
 
+import './services/user'
 import config from './config';
 // import express from 'express';
 import Logger from './loaders/logger';

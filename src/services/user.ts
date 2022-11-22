@@ -1,12 +1,25 @@
 import { IUserAccount, IUserAccountInputDTO } from '../types/interfaces/IUserAccount';
 
-function test(constructor: Function) {
-  console.log('123 :>> ', 123);
-  console.log('constructor :>> ', constructor);
+const WithErrorLog = (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+  const fn = descriptor.value;
+  descriptor.value = async (...args: any) => {
+    try {
+      await fn.apply(this, args);
+    } catch (error) {
+      console.log('error :>> ', error);
+      console.log('Entered Catch----->');
+      const [, , next] = args;
+      next(error);
+    }
+  };
+};
+
+class UserService {
+  @WithErrorLog
+  signUp() {
+    new Error('test test');
+  }
 }
 
-function UserService() {
-  @test
-  const signUp = (userAccountInputDTO: IUserAccountInputDTO) => {};
-  return {};
-}
+const UserServiceInstance = new UserService();
+UserServiceInstance.signUp();

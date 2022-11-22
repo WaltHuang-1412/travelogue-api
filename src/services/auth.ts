@@ -11,12 +11,7 @@ import { randomBytes, Certificate } from 'crypto';
 import { IUserAccount, IUserAccountInputDTO } from '../types/interfaces/IUserAccount';
 import { IUserVerification } from '../types/interfaces/IUserVerification';
 import randomatic from 'randomatic';
-function test(constructor: Function) {
-  console.log('123 :>> ', 123);
-  console.log('constructor :>> ', constructor);
-}
 
-@test
 export default class Auth {
   private UserAccount: any;
   private UserVerification: any;
