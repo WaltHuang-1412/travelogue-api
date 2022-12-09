@@ -2948,6 +2948,11 @@ stack-trace@0.0.x:
   resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
   integrity sha512-KGzahc7puUKkzyMt+IqAep+TVNbKP+k2Lmwhub39m1AsTSkaDutx56aDCo+HLDzf/D26BIHTJWNiTG1KAJiQCg==
 
+status-code-enum@^1.0.0:
+  version "1.0.0"
+  resolved "https://proget.higgstar.com/npm/npm-dev/status-code-enum/-/status-code-enum-1.0.0.tgz#097b6d87e8402fa20f5fbf3c50a24eda20d4efed"
+  integrity sha512-aDTkL2wug8wYX8i0a2K1foqIDaJyGF/a3I0KTZ9gD4MJaxzd7/LKD1VQ2rXL5u7fWESVY+qY2LQLqj6LK/YXiA==
+
 statuses@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-2.0.1.tgz#55cb000ccf1d48728bd23c685a063998cf1a1b63"

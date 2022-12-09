@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import { celebrate, Joi } from 'celebrate';
 import Auth from '../../services/auth';
 import Result from '../../services/result';
@@ -36,14 +36,14 @@ export default async (app: Router) => {
         password: Joi.string().required().trim().alphanum().min(8).max(12),
       }),
     }),
-    async (req: Request, res: Response) => {
+    async (request: Request, response: Response, next: NextFunction) => {
       try {
-        const { body } = req;
+        const { body } = request;
         const { account, password } = body;
         const { accessToken, refreshToken } = await auth.signIn(account, password);
-        res.json(result.success()({ accessToken, refreshToken })).status(200).end();
+        response.json(result.success()({ accessToken, refreshToken })).status(200).end();
       } catch (error) {
-        res.json(result.fail()(error));
+        response.json(result.fail()(error)).end();
       }
     },
   );

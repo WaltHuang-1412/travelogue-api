@@ -11,6 +11,7 @@ import { randomBytes, Certificate } from 'crypto';
 import { IUserAccount, IUserAccountInputDTO } from '../types/interfaces/IUserAccount';
 import { IUserVerification } from '../types/interfaces/IUserVerification';
 import randomatic from 'randomatic';
+import { isNil } from 'lodash';
 
 export default class Auth {
   private UserAccount: any;
@@ -66,13 +67,11 @@ export default class Auth {
           account,
         },
       });
-      if (!userRecord) throw new Error('User not registered');
-      this.logger.silly('Checking password');
+
+      if (isNil(userRecord)) throw new Error('User not registered');
       const validPassword = await argon2.verify(userRecord.password, password);
 
       if (validPassword) {
-        this.logger.silly('Password is valid!');
-        this.logger.silly('Generating JWT');
         const accessToken = this.generateToken({ user: userRecord });
         const refreshToken = this.generateToken({ user: userRecord, lifeTime: 60 * 60 * 24 * 2 });
         return { accessToken, refreshToken };
